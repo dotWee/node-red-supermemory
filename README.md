@@ -77,4 +77,6 @@ Contributions, bug reports, and feature requests are welcome! Please open an iss
 
 ## License
 
-ISC License (see LICENSE file).
+Copyright (C) 2025 [Lukas 'dotWee' Wolfsteiner](https://lukas.wolfsteiner.media?ref=node-red-contrib-supermemory)
+
+Licensed under the _Do What The Fuck You Want To_ public license (see [LICENSE](./LICENSE) file).
