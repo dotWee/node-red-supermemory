@@ -1,0 +1,97 @@
+<script type="text/javascript">
+    RED.nodes.registerType('supermemory-search',{
+        category: 'Supermemory',
+        color: '#7ABFF3',
+        defaults: {
+            name: {value:""},
+            config: {value:"", type:"supermemory-config", required: true},
+            query: {value:"", required: true},
+            queryType: {value: "msg"},
+            limit: {value: 10, validate: RED.validators.number()},
+            limitType: {value: "num"},
+            filters: {value:""},
+            filtersType: {value: "msg"},
+            categoriesFilter: {value:""},
+            categoriesFilterType: {value: "msg"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "supermemory-icon.svg",
+        label: function() {
+            return this.name||"Search Memories";
+        },
+        oneditprepare: function() {
+            $("#node-input-query").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'str', 'jsonata', 'env'], typeField: "#node-input-queryType"});
+            $("#node-input-limit").typedInput({default: 'num', types: ['msg', 'flow', 'global', 'num', 'jsonata', 'env'], typeField: "#node-input-limitType"});
+            $("#node-input-filters").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'json', 'jsonata', 'env'], typeField: "#node-input-filtersType"});
+            $("#node-input-categoriesFilter").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'str', 'json', 'jsonata', 'env'], typeField: "#node-input-categoriesFilterType"});
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="supermemory-search">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-config"><i class="fa fa-cog"></i> Config</label>
+        <input type="text" id="node-input-config">
+    </div>
+    <hr/>
+    <div class="form-row">
+        <label for="node-input-query"><i class="fa fa-search"></i> Query</label>
+        <input type="text" id="node-input-query" placeholder="msg.payload or search terms">
+        <input type="hidden" id="node-input-queryType">
+    </div>
+    <div class="form-row">
+        <label for="node-input-limit"><i class="fa fa-list-ol"></i> Limit</label>
+        <input type="text" id="node-input-limit" placeholder="10">
+        <input type="hidden" id="node-input-limitType">
+    </div>
+    <div class="form-row">
+        <label for="node-input-filters"><i class="fa fa-filter"></i> Filters (Optional)</label>
+        <input type="text" id="node-input-filters" placeholder="msg.filters (object)">
+        <input type="hidden" id="node-input-filtersType">
+        <span style="font-size: 0.8em;">See Supermemory API docs for filter format.</span>
+    </div>
+    <div class="form-row">
+        <label for="node-input-categoriesFilter"><i class="fa fa-tags"></i> Categories (Optional)</label>
+        <input type="text" id="node-input-categoriesFilter" placeholder="msg.categories (string or array)">
+        <input type="hidden" id="node-input-categoriesFilterType">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="supermemory-search">
+    <p>Searches memories in Supermemory.</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">any</span></dt>
+        <dd> The incoming message payload. Typically used as the default <b>Query</b> if not overridden.</dd>
+        <dt class="optional">limit <span class="property-type">number</span></dt>
+        <dd> Optional. Maximum number of results to return (default: 10).</dd>
+        <dt class="optional">filters <span class="property-type">object</span></dt>
+        <dd> Optional. Filter object based on metadata. See <a href="https://docs.supermemory.ai/api-reference" target="_blank">API documentation</a> for format.</dd>
+        <dt class="optional">categoriesFilter <span class="property-type">string | array</span></dt>
+        <dd> Optional. Filter results by category ID(s).</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>This node sends the query and optional filters to the Supermemory <code>/search</code> endpoint using the configured API Key.</p>
+    <ul>
+        <li><b>Config:</b> Select the Supermemory configuration node containing your API Key.</li>
+        <li><b>Query:</b> The search query string. This field is required.</li>
+        <li><b>Limit:</b> The maximum number of search results to return.</li>
+        <li><b>Filters:</b> An optional JSON object for advanced filtering based on memory metadata.</li>
+        <li><b>Categories:</b> An optional string or array of strings to filter search results by category.</li>
+    </ul>
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">object</span></dt>
+        <dd> On success, contains the API search results (<code>{ results: [...] }</code>). On failure, contains an error object (<code>{ error: "...", details: ... }</code>).</dd>
+    </dl>
+
+    <p>Requires a configured <code>supermemory-config</code> node.</p>
+</script> 

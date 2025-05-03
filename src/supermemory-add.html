@@ -1,0 +1,104 @@
+<script type="text/javascript">
+    RED.nodes.registerType('supermemory-add',{
+        category: 'Supermemory',
+        color: '#7ED9A3',
+        defaults: {
+            name: {value:""},
+            config: {value:"", type:"supermemory-config", required: true},
+            content: {value:"", required: true}, // Default to empty, but required
+            contentType: {value: "msg"}, // Allow sourcing from msg, flow, global, str, jsonata, etc.
+            metadata: {value:""},
+            metadataType: {value: "msg"},
+            spaceIds: {value:""},
+            spaceIdsType: {value: "msg"},
+            summarize: {value: false},
+            memoryId: {value:""}, // Optional ID to provide
+            memoryIdType: {value: "msg"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "supermemory-icon.svg", // Will create this later
+        label: function() {
+            return this.name||"Add Memory";
+        },
+        oneditprepare: function() {
+            // Setup typed inputs for fields that can be sourced from msg/flow/etc.
+            $("#node-input-content").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'str', 'jsonata', 'env'], typeField: "#node-input-contentType"});
+            $("#node-input-metadata").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'json', 'jsonata', 'env'], typeField: "#node-input-metadataType"});
+            $("#node-input-spaceIds").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'str', 'json', 'jsonata', 'env'], typeField: "#node-input-spaceIdsType"});
+            $("#node-input-memoryId").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'str', 'jsonata', 'env'], typeField: "#node-input-memoryIdType"});
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="supermemory-add">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-config"><i class="fa fa-cog"></i> Config</label>
+        <input type="text" id="node-input-config">
+    </div>
+    <hr/>
+    <div class="form-row">
+        <label for="node-input-content"><i class="fa fa-file-text-o"></i> Content</label>
+        <input type="text" id="node-input-content" placeholder="msg.payload">
+        <input type="hidden" id="node-input-contentType">
+    </div>
+    <div class="form-row">
+        <label for="node-input-metadata"><i class="fa fa-list-alt"></i> Metadata (Optional)</label>
+        <input type="text" id="node-input-metadata" placeholder="msg.metadata (object)">
+        <input type="hidden" id="node-input-metadataType">
+    </div>
+    <div class="form-row">
+        <label for="node-input-spaceIds"><i class="fa fa-folder-open-o"></i> Space IDs (Optional)</label>
+        <input type="text" id="node-input-spaceIds" placeholder="msg.spaceIds (string or array)">
+        <input type="hidden" id="node-input-spaceIdsType">
+    </div>
+    <div class="form-row">
+        <label for="node-input-memoryId"><i class="fa fa-id-card-o"></i> Memory ID (Optional)</label>
+        <input type="text" id="node-input-memoryId" placeholder="Leave blank to auto-generate">
+        <input type="hidden" id="node-input-memoryIdType">
+    </div>
+    <div class="form-row">
+        <label for="node-input-summarize" style="width:auto"><i class="fa fa-compress"></i> Summarize? </label>
+        <input type="checkbox" id="node-input-summarize" style="display:inline-block; width:auto; vertical-align:top;">
+    </div>
+
+</script>
+
+<script type="text/html" data-help-name="supermemory-add">
+    <p>Adds a new memory to Supermemory.</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">any</span></dt>
+        <dd> The incoming message payload. Typically used as the default <b>Content</b> if not overridden.</dd>
+        <dt class="optional">metadata <span class="property-type">object</span></dt>
+        <dd> Optional. Key-value pairs to associate with the memory.</dd>
+        <dt class="optional">spaceIds <span class="property-type">string | array</span></dt>
+        <dd> Optional. ID(s) of the space(s) to add the memory to.</dd>
+        <dt class="optional">memoryId <span class="property-type">string</span></dt>
+        <dd> Optional. Provide a specific ID for the memory. If omitted, Supermemory generates one.</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>This node sends the specified content and optional metadata to the Supermemory <code>/add</code> endpoint using the configured API Key.</p>
+    <ul>
+        <li><b>Config:</b> Select the Supermemory configuration node containing your API Key.</li>
+        <li><b>Content:</b> The main text content of the memory. This field is required.</li>
+        <li><b>Metadata:</b> An optional JSON object containing key-value pairs. Values can be strings, numbers, or booleans.</li>
+        <li><b>Space IDs:</b> An optional string or array of strings specifying which space(s) to add the memory to.</li>
+        <li><b>Memory ID:</b> An optional string to specify a custom ID for this memory.</li>
+        <li><b>Summarize:</b> If checked, requests Supermemory to summarize related memories during ingestion (default: false).</li>
+    </ul>
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">object</span></dt>
+        <dd> On success, contains the API response (<code>{ id: "...", status: "..." }</code>). On failure, contains an error object (<code>{ error: "...", details: ... }</code>).</dd>
+    </dl>
+
+    <p>Requires a configured <code>supermemory-config</code> node.</p>
+</script> 

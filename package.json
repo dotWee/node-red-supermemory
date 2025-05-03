@@ -1,0 +1,45 @@
+{
+  "name": "@dotwee/node-red-supermemory",
+  "version": "1.0.0",
+  "description": "Node-RED nodes for interacting with the Supermemory.ai API",
+  "homepage": "https://github.com/dotWee/node-red-contrib-supermemory",
+  "bugs": {
+    "url": "https://github.com/dotWee/node-red-contrib-supermemory/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotWee/node-red-contrib-supermemory.git"
+  },
+  "keywords": [
+    "node-red",
+    "supermemory.ai",
+    "supermemory",
+    "memory",
+    "ai",
+    "rag",
+    "vector",
+    "search"
+  ],
+  "author": "Lukas Wolfsteiner",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2"
+  },
+  "devDependencies": {
+    "node-red": "^3.1.0",
+    "node-red-node-test-helper": "^0.3.4",
+    "nock": "^13.5.4",
+    "mocha": "^10.4.0",
+    "should": "^13.2.3"
+  },
+  "node-red" : {
+        "nodes": {
+            "supermemory-config": "src/supermemory-config.js",
+            "supermemory-add": "src/supermemory-add.js",
+            "supermemory-search": "src/supermemory-search.js"
+        }
+    },
+    "scripts": {
+        "test": "mocha \"test/**/*_spec.js\""
+    }
+}
