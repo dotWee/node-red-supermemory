@@ -2,13 +2,13 @@
   "name": "@dotwee/node-red-supermemory",
   "version": "1.0.0",
   "description": "Node-RED nodes for interacting with the Supermemory.ai API",
-  "homepage": "https://github.com/dotWee/node-red-contrib-supermemory",
+  "homepage": "https://github.com/dotWee/node-red-supermemory",
   "bugs": {
-    "url": "https://github.com/dotWee/node-red-contrib-supermemory/issues"
+    "url": "https://github.com/dotWee/node-red-supermemory/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dotWee/node-red-contrib-supermemory.git"
+    "url": "git+https://github.com/dotWee/node-red-supermemory.git"
   },
   "keywords": [
     "node-red",

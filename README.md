@@ -1,7 +1,9 @@
 # @dotwee/node-red-supermemory
 
-[![NPM version](https://badge.fury.io/js/node-red-contrib-supermemory.svg)](https://badge.fury.io/js/node-red-contrib-supermemory)
-[![Downloads](https://img.shields.io/npm/dm/node-red-contrib-supermemory.svg)](https://www.npmjs.com/package/node-red-contrib-supermemory)
+[![GitHub License](https://img.shields.io/github/license/dotWee/node-red-supermemory)](https://github.com/dotWee/node-red-supermemory)
+[![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/dotwee/node-red-supermemory)](https://github.com/dotWee/node-red-supermemory)
+[![NPM Version](https://img.shields.io/npm/v/%40dotwee%2Fnode-red-supermemory)](https://www.npmjs.com/package/@dotwee/node-red-supermemory)
+[![NPM Downloads](https://img.shields.io/npm/dm/%40dotwee%2Fnode-red-supermemory)](https://www.npmjs.com/package/@dotwee/node-red-supermemory)
 
 A collection of [Node-RED](https://nodered.org) nodes to interact with the [Supermemory.ai](https://supermemory.ai/) API (see OpenAPI docs [here](https://raw.githubusercontent.com/supermemoryai/supermemory/refs/heads/main/apps/docs/openapi.json)).
 
@@ -20,7 +22,9 @@ Alternatively, search for `@dotwee/node-red-supermemory` in the Node-RED Palette
 ## Prerequisites
 
 1. **Node-RED:** Ensure you have a working Node-RED installation.
-2. **Supermemory Account:** Sign up at [dev.supermemory.ai](https://dev.supermemory.ai) to get an API key.
+2. **Supermemory Instance:**  
+  a) Sign up at [dev.supermemory.ai](https://dev.supermemory.ai) to get an API key.  
+  b) Self hosted supermemory instance. Follow the [self-hosting-guide](https://github.com/supermemoryai/supermemory/blob/main/SELF-HOSTING-GUIDE.md).
 
 ## Nodes
 
@@ -51,7 +55,7 @@ This package currently provides the following nodes:
   * **Categories (Optional):** A string or array of strings to filter results by category ID(s).
   * **Output:** `msg.payload` contains the API response (`{ results: [...] }`) on success or an error object on failure.
 
-*(Note: Nodes for Update, Delete, and Fast Search may be added in future versions based on the OpenAPI spec.)*
+> **Note**: _Nodes for Update, Delete, and Fast Search may be added in future versions based on the OpenAPI spec._
 
 ## Usage Example
 
@@ -73,10 +77,10 @@ Here's a simple example flow to add a memory and then search for it:
 
 ## Contributing
 
-Contributions, bug reports, and feature requests are welcome! Please open an issue or pull request on the [GitHub repository](https://github.com/dotWee/node-red-contrib-supermemory).
+Contributions, bug reports, and feature requests are welcome! Please open an issue or pull request on the [GitHub repository](https://github.com/dotWee/node-red-supermemory).
 
 ## License
 
-Copyright (C) 2025 [Lukas 'dotWee' Wolfsteiner](https://lukas.wolfsteiner.media?ref=node-red-contrib-supermemory)
+Copyright (C) 2025 [Lukas 'dotWee' Wolfsteiner](https://lukas.wolfsteiner.media?ref=node-red-supermemory)
 
 Licensed under the _Do What The Fuck You Want To_ public license (see [LICENSE](./LICENSE) file).
