@@ -57,7 +57,7 @@ This package currently provides the following nodes:
 
 > **Note**: _Nodes for Update, Delete, and Fast Search may be added in future versions based on the OpenAPI spec._
 
-## Usage Example
+## Usage Example (see also [`examples/add-and-search-supermemory.js`](./examples/add-and-search-supermemory.js))
 
 Here's a simple example flow to add a memory and then search for it:
 
