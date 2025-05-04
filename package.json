@@ -1,6 +1,6 @@
 {
   "name": "@dotwee/node-red-supermemory",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node-RED nodes for interacting with the Supermemory.ai API",
   "homepage": "https://github.com/dotWee/node-red-supermemory",
   "bugs": {
