@@ -12,8 +12,8 @@ describe('Supermemory Config Node', function () {
     });
 
     afterEach(function (done) {
-        helper.unload().then(function() {
-             helper.stopServer(done);
+        helper.unload().then(function () {
+            helper.stopServer(done);
         });
     });
 

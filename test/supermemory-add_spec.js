@@ -10,7 +10,7 @@ describe('Supermemory Add Node', function () {
     this.timeout(10000);
 
     beforeEach(function (done) {
-        helper.startServer(function() {
+        helper.startServer(function () {
             nock.cleanAll(); // Clean nock before each test in this suite
             done();
         });
@@ -18,8 +18,8 @@ describe('Supermemory Add Node', function () {
 
     afterEach(function (done) {
         nock.cleanAll();
-        helper.unload().then(function() {
-             helper.stopServer(done);
+        helper.unload().then(function () {
+            helper.stopServer(done);
         });
     });
 
@@ -49,7 +49,7 @@ describe('Supermemory Add Node', function () {
             { id: "h1", type: "helper" }
         ];
 
-        const scope = nock(BASE_URL, { reqheaders: {'x-api-key': 'dummy-key', 'content-type': 'application/json'} })
+        const scope = nock(BASE_URL, { reqheaders: { 'x-api-key': 'dummy-key', 'content-type': 'application/json' } })
             .post('/add', { content: "Test content" })
             .reply(200, { id: "mem-123", status: "added" });
 

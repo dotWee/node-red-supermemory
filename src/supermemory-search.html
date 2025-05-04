@@ -1,30 +1,30 @@
 <script type="text/javascript">
-    RED.nodes.registerType('supermemory-search',{
+    RED.nodes.registerType('supermemory-search', {
         category: 'Supermemory',
         color: '#7ABFF3',
         defaults: {
-            name: {value:""},
-            config: {value:"", type:"supermemory-config", required: true},
-            query: {value:"", required: true},
-            queryType: {value: "msg"},
-            limit: {value: 10, validate: RED.validators.number()},
-            limitType: {value: "num"},
-            filters: {value:""},
-            filtersType: {value: "msg"},
-            categoriesFilter: {value:""},
-            categoriesFilterType: {value: "msg"}
+            name: { value: "" },
+            config: { value: "", type: "supermemory-config", required: true },
+            query: { value: "", required: true },
+            queryType: { value: "msg" },
+            limit: { value: 10, validate: RED.validators.number() },
+            limitType: { value: "num" },
+            filters: { value: "" },
+            filtersType: { value: "msg" },
+            categoriesFilter: { value: "" },
+            categoriesFilterType: { value: "msg" }
         },
-        inputs:1,
-        outputs:1,
+        inputs: 1,
+        outputs: 1,
         icon: "supermemory-icon.svg",
-        label: function() {
-            return this.name||"Search Memories";
+        label: function () {
+            return this.name || "Search Memories";
         },
-        oneditprepare: function() {
-            $("#node-input-query").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'str', 'jsonata', 'env'], typeField: "#node-input-queryType"});
-            $("#node-input-limit").typedInput({default: 'num', types: ['msg', 'flow', 'global', 'num', 'jsonata', 'env'], typeField: "#node-input-limitType"});
-            $("#node-input-filters").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'json', 'jsonata', 'env'], typeField: "#node-input-filtersType"});
-            $("#node-input-categoriesFilter").typedInput({default: 'msg', types: ['msg', 'flow', 'global', 'str', 'json', 'jsonata', 'env'], typeField: "#node-input-categoriesFilterType"});
+        oneditprepare: function () {
+            $("#node-input-query").typedInput({ default: 'msg', types: ['msg', 'flow', 'global', 'str', 'jsonata', 'env'], typeField: "#node-input-queryType" });
+            $("#node-input-limit").typedInput({ default: 'num', types: ['msg', 'flow', 'global', 'num', 'jsonata', 'env'], typeField: "#node-input-limitType" });
+            $("#node-input-filters").typedInput({ default: 'msg', types: ['msg', 'flow', 'global', 'json', 'jsonata', 'env'], typeField: "#node-input-filtersType" });
+            $("#node-input-categoriesFilter").typedInput({ default: 'msg', types: ['msg', 'flow', 'global', 'str', 'json', 'jsonata', 'env'], typeField: "#node-input-categoriesFilterType" });
         }
     });
 </script>
@@ -94,4 +94,4 @@
     </dl>
 
     <p>Requires a configured <code>supermemory-config</code> node.</p>
-</script> 
+</script>

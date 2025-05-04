@@ -1,15 +1,15 @@
 <script type="text/javascript">
-    RED.nodes.registerType('supermemory-config',{
+    RED.nodes.registerType('supermemory-config', {
         category: 'config',
         defaults: {
-            name: {value:"", required:true},
-            baseUrl: {value:"https://v2.api.supermemory.ai", required: false}
+            name: { value: "", required: true },
+            baseUrl: { value: "https://v2.api.supermemory.ai", required: false }
         },
         credentials: {
-            apiKey: {type: "password", required: true}
+            apiKey: { type: "password", required: true }
         },
-        label: function() {
-            return this.name||"Supermemory Config";
+        label: function () {
+            return this.name || "Supermemory Config";
         }
     });
 </script>

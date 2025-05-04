@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-module.exports = function(RED) {
+module.exports = function (RED) {
     function SupermemorySearchNode(config) {
         RED.nodes.createNode(this, config);
         var node = this;
@@ -8,12 +8,12 @@ module.exports = function(RED) {
 
         if (!node.configNode || !node.configNode.apiKey) {
             node.error("API Key not configured. Please configure the Supermemory Config node.");
-            node.status({fill:"red", shape:"dot", text:"API Key missing"});
+            node.status({ fill: "red", shape: "dot", text: "API Key missing" });
             return;
         }
 
-        node.on('input', async function(msg, send, done) {
-            send = send || function() { node.send.apply(node,arguments) };
+        node.on('input', async function (msg, send, done) {
+            send = send || function () { node.send.apply(node, arguments) };
 
             const query = RED.util.evaluateNodeProperty(config.query, config.queryType, node, msg);
 
@@ -42,8 +42,8 @@ module.exports = function(RED) {
 
             if (!query || typeof query !== 'string') {
                 node.error("Input 'query' (string) is required.", msg);
-                node.status({fill:"red", shape:"dot", text:"Query required"});
-                 if (done) { done(); }
+                node.status({ fill: "red", shape: "dot", text: "Query required" });
+                if (done) { done(); }
                 return;
             }
 
@@ -58,7 +58,7 @@ module.exports = function(RED) {
             if (filters) { payload.filters = filters; }
             if (categoriesFilter) { payload.categoriesFilter = Array.isArray(categoriesFilter) ? categoriesFilter : [categoriesFilter]; } // Ensure array
 
-            node.status({fill:"blue", shape:"dot", text:"Searching..."});
+            node.status({ fill: "blue", shape: "dot", text: "Searching..." });
 
             try {
                 const response = await axios.post(url, payload, { headers: headers });
@@ -72,15 +72,15 @@ module.exports = function(RED) {
                     errorMsg = `API Error (${error.response.status}): ${error.response.data.error || error.message}`;
                     errorDetails = error.response.data;
                     node.error(errorMsg, msg);
-                    node.status({fill:"red", shape:"dot", text:`API Error ${error.response.status}`});
+                    node.status({ fill: "red", shape: "dot", text: `API Error ${error.response.status}` });
                 } else if (error.request) {
                     errorMsg = "No response received from Supermemory API";
                     node.error(errorMsg, msg);
-                    node.status({fill:"red", shape:"dot", text:"No response"});
+                    node.status({ fill: "red", shape: "dot", text: "No response" });
                 } else {
                     errorMsg = `Request setup error: ${error.message}`;
                     node.error(errorMsg, msg);
-                    node.status({fill:"red", shape:"dot", text:"Request error"});
+                    node.status({ fill: "red", shape: "dot", text: "Request error" });
                 }
                 msg.payload = { error: errorMsg, details: errorDetails };
                 send(msg);

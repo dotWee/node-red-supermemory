@@ -10,7 +10,7 @@ describe('Supermemory Search Node', function () {
     this.timeout(10000);
 
     beforeEach(function (done) {
-        helper.startServer(function() {
+        helper.startServer(function () {
             nock.cleanAll();
             done();
         });
@@ -18,8 +18,8 @@ describe('Supermemory Search Node', function () {
 
     afterEach(function (done) {
         nock.cleanAll();
-        helper.unload().then(function() {
-             helper.stopServer(done);
+        helper.unload().then(function () {
+            helper.stopServer(done);
         });
     });
 
@@ -48,8 +48,8 @@ describe('Supermemory Search Node', function () {
             { id: "h1", type: "helper" }
         ];
 
-        const mockResponse = { results: [{documentId: "doc1", score: 0.9}] };
-        const scope = nock(BASE_URL, { reqheaders: {'x-api-key': 'dummy-key'} })
+        const mockResponse = { results: [{ documentId: "doc1", score: 0.9 }] };
+        const scope = nock(BASE_URL, { reqheaders: { 'x-api-key': 'dummy-key' } })
             .post('/search', { q: "search this", limit: 10 })
             .reply(200, mockResponse);
 
@@ -78,9 +78,9 @@ describe('Supermemory Search Node', function () {
             { id: "h1", type: "helper" }
         ];
 
-        const mockResponse = { results: [{documentId: "doc1", score: 0.9}] };
+        const mockResponse = { results: [{ documentId: "doc1", score: 0.9 }] };
         // Expecting limit: 5 in the POST body based on the fix and the received message
-        const scope = nock(BASE_URL, { reqheaders: {'x-api-key': 'dummy-key'} })
+        const scope = nock(BASE_URL, { reqheaders: { 'x-api-key': 'dummy-key' } })
             .post('/search', { q: "search this", limit: 5 })
             .reply(200, mockResponse);
 

@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-module.exports = function(RED) {
+module.exports = function (RED) {
     function SupermemoryAddNode(config) {
         RED.nodes.createNode(this, config);
         var node = this;
@@ -8,12 +8,12 @@ module.exports = function(RED) {
 
         if (!node.configNode || !node.configNode.apiKey) {
             node.error("API Key not configured. Please configure the Supermemory Config node.");
-            node.status({fill:"red", shape:"dot", text:"API Key missing"});
+            node.status({ fill: "red", shape: "dot", text: "API Key missing" });
             return;
         }
 
-        node.on('input', async function(msg, send, done) {
-            send = send || function() { node.send.apply(node,arguments) }; // Node-RED 1.0 compatible send
+        node.on('input', async function (msg, send, done) {
+            send = send || function () { node.send.apply(node, arguments) }; // Node-RED 1.0 compatible send
 
             const content = RED.util.evaluateNodeProperty(config.content, config.contentType, node, msg);
             const metadata = RED.util.evaluateNodeProperty(config.metadata, config.metadataType, node, msg);
@@ -23,7 +23,7 @@ module.exports = function(RED) {
 
             if (!content || typeof content !== 'string') {
                 node.error("Input 'content' (string) is required.", msg);
-                node.status({fill:"red", shape:"dot", text:"Content required"});
+                node.status({ fill: "red", shape: "dot", text: "Content required" });
                 if (done) { done(); }
                 return;
             }
@@ -40,7 +40,7 @@ module.exports = function(RED) {
             if (memoryId) { payload.id = memoryId; }
 
 
-            node.status({fill:"blue", shape:"dot", text:"Adding memory..."});
+            node.status({ fill: "blue", shape: "dot", text: "Adding memory..." });
 
             try {
                 const response = await axios.post(url, payload, { headers: headers });
@@ -56,22 +56,22 @@ module.exports = function(RED) {
                     errorMsg = `API Error (${error.response.status}): ${error.response.data.error || error.message}`;
                     errorDetails = error.response.data;
                     node.error(errorMsg, msg);
-                    node.status({fill:"red", shape:"dot", text:`API Error ${error.response.status}`});
+                    node.status({ fill: "red", shape: "dot", text: `API Error ${error.response.status}` });
                 } else if (error.request) {
                     // The request was made but no response was received
                     errorMsg = "No response received from Supermemory API";
                     node.error(errorMsg, msg);
-                    node.status({fill:"red", shape:"dot", text:"No response"});
+                    node.status({ fill: "red", shape: "dot", text: "No response" });
                 } else {
                     // Something happened in setting up the request that triggered an Error
                     errorMsg = `Request setup error: ${error.message}`;
                     node.error(errorMsg, msg);
-                    node.status({fill:"red", shape:"dot", text:"Request error"});
+                    node.status({ fill: "red", shape: "dot", text: "Request error" });
                 }
                 msg.payload = { error: errorMsg, details: errorDetails }; // Pass error details in payload
                 send(msg); // Send error details on output
             } finally {
-                 if (done) { done(); } // Node-RED 1.0 compatible done
+                if (done) { done(); } // Node-RED 1.0 compatible done
             }
         });
     }
