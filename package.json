@@ -1,6 +1,6 @@
 {
   "name": "@dotwee/node-red-supermemory",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Node-RED nodes for interacting with the Supermemory.ai API",
   "homepage": "https://github.com/dotWee/node-red-supermemory",
   "bugs": {
@@ -32,17 +32,21 @@
     "mocha": "^10.4.0",
     "should": "^13.2.3"
   },
-  "node-red" : {
-        "nodes": {
-            "supermemory-config": "src/supermemory-config.js",
-            "supermemory-add": "src/supermemory-add.js",
-            "supermemory-search": "src/supermemory-search.js"
-        }
-    },
-    "scripts": {
-        "test": "mocha \"test/**/*_spec.js\""
-    },
-    "publishConfig": {
-        "access": "public"
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "node-red": {
+    "version": ">=2.0.0",
+    "nodes": {
+      "supermemory-config": "src/supermemory-config.js",
+      "supermemory-add": "src/supermemory-add.js",
+      "supermemory-search": "src/supermemory-search.js"
     }
+  },
+  "scripts": {
+    "test": "mocha \"test/**/*_spec.js\""
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
