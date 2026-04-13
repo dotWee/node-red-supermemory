@@ -80,7 +80,7 @@ jobs:
           # Ensure your commits follow conventional commit messages
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           # tag_name will automatically use the triggering tag (github.ref_name)
           # release_name: Release ${{ github.ref_name }} # Optional: defaults to tag name
